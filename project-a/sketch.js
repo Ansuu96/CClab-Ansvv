@@ -1,146 +1,110 @@
-/*
+<!-- 
 Template for IMA's Creative Coding Lab 
 
 Project A: Generative Creatures
 CCLaboratories Biodiversity Atlas 
-*/
+-->
 
+<!DOCTYPE html>
+<html>
 
-let s;
-let speedX = 0;
-let b = 0;
-let c = 0;
-let z = 10;
-let offr = 0;
-let g = 0;
-let a = 5;
-let u;
-let scaleS = 10;
-let offset;
-let bc = 255;
-let sep = 20;
-let roff = 0;
+<head>
+    <title>horanghaei Immunoid</title>
 
-function setup() {
-    let canvas = createCanvas(800, 500);
-    canvas.id("p5-canvas");
-    canvas.parent("p5-canvas-container");
-    function setup() {
-  x = width / 2;
-  y = height / 2;
-  console.log(y);
-}
-}
+    <!-- allow special characters, including Arabic, Chinese, Korean, Japanese, etc. -->
+    <meta charset="UTF-8">
+    <!-- link the style sheet -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- import p5.js library -->
+    <script src="https://editor.p5js.org/Ansuu96/full/HuG042KVS"></script>
+    <script>
+        // prevent scrolling when spacebar and arrow keys are pressed.
+        window.addEventListener("keydown", function (e) { if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) { e.preventDefault(); } }, false);
+    </script>
+</head>
 
+<body>
+    <!-- title -->
+    <div id="title-wrapper">
+        <h1 class="headline black">Immunis horanghaei</h1>
+    </div>
 
-function draw() {
-  let d = dist(mouseX, mouseY, x, y); 
-  let s = map(sin(frameCount * 0.05), -1, 1, 1, 20);
-  if (mouseIsPressed) {
-    bc = lerp(bc, 145, 0.05);
-    background(bc);
-  }else{
-    bc = lerp(bc, 0, 0.1);
-    background(bc);
-  }
- 
-                  
-    
-  x = width*noise(frameCount*0.01);
-  y = height*noise(frameCount*0.008);
-                 //blue
-  fill(204, 253, 255);
-  noStroke();
-  circle(x + b + random(-5, 5), y + c + random(-5, 5), s);
-  //pink
-  fill(250, 214, 255);
-  circle(x + b + random(-5, 5), y + c + random(-5, 5), s);
-  //yellow
-  fill(249, 250, 222);
-  circle(x + b + random(-5, 5), y + c + random(-5, 5), s);
-  //purple
-  fill(168, 61, 242);
-  circle(x + b + random(-5, 5), y + c + random(-5, 5), s);
-  //bg
-  
-   for (let angle = 0; angle < 2 * PI; angle += PI / 8) {
-     for (let r = 30; r < width / 2; r += 50) {
-       let xb = width / 2 + (r + offr) * cos(angle);
-       let yb = height / 2 + (r + offr) * sin(angle);
-       let g = dist(x, y, xb, yb);
-       offr = map(g, 0, width / 2, -30, 50);
-       fill(145, 200, 145);
-       let off = map(noise(frameCount * 0.1 + xb + yb), 0, 1, 1, z);
-       circle(xb, yb, z);
-     let maxD = dist(0, 0, width, height);
-       a = map(g, 0, maxD, 10, 3 * a);
-      let op = map(d, 0, 100, 100, 0);
-      fill(136, 8, 8);
-      if (noise(yb * xb) > 0.5) {
-        rect(xb, yb, z);
-        if (noise(angle * r) > 0.5) {
-         circle(xb, yb, z * scale);
-        }
-        if (mouseIsPressed == true) {
-           noStroke();
-          fill(136, 8, 8);
-          if (noise(yb * xb) > 0.5) {
-            rect(xb, yb, z);
-           if (noise(angle * r) > 0.5) {
-             circle(xb, yb, z * scale);
-             } else {
-              fill(255, 255, 255);
-              stroke(255, 255, 255);
-             if (noise(yb * xb) > 0.5) {
-              rect(xb, yb, z);
-              if (noise(angle * r) > 0.5) {
-                circle(xb, yb, z * scale);
-                 }
-                if (mouseIsPressed == true) {
-                   fill(145, 200, 145);
-                   let off = map(noise(frameCount * 0.1 + xb + yb), 0, 1, 1, z);
-                   circle(xb, yb, z);
-                   let maxD = dist(0, 0, width, height);
-                  a = map(g, 0, maxD, 10, 3 * a);
-                 let op = map(d, 0, 100, 100, 0);
-                 } else {
-                   fill(255, 255, 255);
-                  let off = map(noise(frameCount * 0.1 + xb + yb), 0, 1, 1, z);
-                  circle(xb, yb, z);
-                  let maxD = dist(0, 0, width, height);
-                  a = map(g, 0, maxD, 10, 3 * a);
-                 let op = map(d, 0, 100, 100, 0);
-                }
-                for (let angle = 0; angle < 2 * PI; angle += PI / 30) {
-                  
-  for (let r = sep; r < width; r += sep) {
-      let xb = width/2 + (r) * cos(angle);
-      let yb = height/ 2 + (r) * sin(angle);
-      let d2 = dist(x, y, xb, yb);
-      let s2 = map(d * r, 0, width * width, 5, 60);
-      let dx = xb - x;
-      let dy = yb - y;
-      let away = 30; //how far it 
+    <!-- main content -->
+    <div id="main-wrapper">
+        <div id="p5-canvas-container">
+            <!-- This is where your p5 sketch will be appended and appear! -->
+        </div>
+        <div class="two-columns">
+            <div class="left">
+                <h3 class="red">Scientific Name:</h3>
+                <p>horanghae immunoid</p>
 
-      noFill();
-    if(mouseIsPressed == true){
-      stroke(145, 200, 145);
-      circle(xb + (away * dx) / d2, yb + (away * dy) / d2, s2);
-      fill(136, 8, 8)
-       rect(xb + (away * dx) / d2, yb + (away * dy) / d2, s2);
-    }
-    }
-  }
-                }
+                <h3 class="red">Discovered by / at:</h3>
+                <p>Biomedical lab that was studying mutation cells, year 2100</p>
 
-                console.log(xb);
+                <h3 class="green">Family:Horanghae
 
-             }
-             }
-          }
-        }
-      }
-     }
-   
-    }
+</h3>
+                <p>In the year 2100, the air was filled with a lethal electronic mist that paralyzes the natural T-cells that humans have, 
+                    This forced researchers to develop creatures that works better than the current immune system. When they finally, perfected their creature the researchers 
+                    injected themselves.
+                    Through a microscopic camera lens, the team watches as this creature navigates the crimson tunnels of their own veins to clear the clotted blood cells.
+                     When the user moves the mouse, the creature glides gracefully to nudge these cells back into motion. 
+                     The moment a mutated virus appears, a click of the mouse causes the creature’s body to become rigid and its eyes to enlargen. 
+                     </p>
+            </div>
+            <div class="right">
+                <h3 class="green">Habitat:</h3>
+                <p>When injected into your body it lives within your bloodstream.</p>
 
+                <h3 class="green">Appearance:</h3>
+                <p>It's a microscopic, alien like shaped guardian that's inserted within the human bloodstream, It moves in a vibrating way that outpaces any natural cells. It uses advanced sensors and can detect and intercept foreign pathogens like viruses with accuracy before they even trigger a systemic immune response. 
+                    When it encounters a blockage or slowing red blood
+                     cells during a cardiac attack, it uses it's body to "nudge" that red blood cell to restart blood flow/circulation. 
+                <h3 class="green">Key Characteristics:</h3>
+                <ul>
+                    <li>The creature is typically nice and glides smoothly to nudge red blood cells, However its demeanor shifts instantly when they detect a pathogen(virus).
+                         The moment a virus is sensed, the creature’s body becomes rigid and its eyes expand becoming focused entirely on the threat. 
+                       
+                         
+</li>
+                
+                </ul>
+            </div>
+        </div>
+        <div class="one-column">
+            <p>
+                <span class="yellow">What we know so far about horanghae immunoid?</span>
+                The giraffe is a large African hoofed mammal belonging to the genus Giraffa. It is the tallest living
+                terrestrial animal and the largest ruminant on Earth. Traditionally, giraffes have been thought of as
+                one species, Giraffa camelopardalis, with nine subspecies. Most recently, researchers proposed dividing
+                them into up to eight extant species due to new research into their mitochondrial and nuclear DNA, as
+                well as morphological measurements. Seven other extinct species of Giraffa are known from the fossil
+                record. (This is from Wikipedia, write the story, history, facts, tales, myths, anecdotes about your
+                creature.)
+                <br>
+                <span class="yellow">User Manual</span>  
+                         <p> 1. As you move your cursor across the screen, the creature moves with the cursor. 
+                         You can manually steer it toward areas of red blood cells to nudge them.
+                        2. The moment you click, the creature’s behavior becomes alerted; its body goes rigid, and its eyes expand. 
+                        In this state, it ignores the general flow of the blood to focus entirely on the virus.
+                        </p>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer" class="black">
+        <p>A CCLab project made by Naransuvd Turtogtokh in Spring 2026</p>
+    </div>
+
+    <!-- Home: Link back to the ATLAS page-->
+    <div id="home">
+        <a href="https://cclab.work/atlas">Back to the ATLAS</a>
+    </div>
+
+    <!-- Include your sketch.js file here -->
+    <script src="sketch.js" type="text/javascript"> </script>
+</body>
+
+</html>
