@@ -1,110 +1,292 @@
-<!-- 
+/*
 Template for IMA's Creative Coding Lab 
 
 Project A: Generative Creatures
 CCLaboratories Biodiversity Atlas 
--->
+*/
 
-<!DOCTYPE html>
-<html>
+let x, y;
+let a = 0;
+let b = 0;
+let c;
+let accX = 0;
+let accY = 0;
+let speedX = 0;
+let speedY = 0;
+let away = 0.3;
+let bc;
+let angle = 0;
+let f = 10;
 
-<head>
-    <title>horanghaei Immunoid</title>
+let xb1 = 700;
+let yb1 = 400;
 
-    <!-- allow special characters, including Arabic, Chinese, Korean, Japanese, etc. -->
-    <meta charset="UTF-8">
-    <!-- link the style sheet -->
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- import p5.js library -->
-    <script src="https://editor.p5js.org/Ansuu96/full/HuG042KVS"></script>
-    <script>
-        // prevent scrolling when spacebar and arrow keys are pressed.
-        window.addEventListener("keydown", function (e) { if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) { e.preventDefault(); } }, false);
-    </script>
-</head>
+let xb2 = 600;
+let yb2 = 100;
 
-<body>
-    <!-- title -->
-    <div id="title-wrapper">
-        <h1 class="headline black">Immunis horanghaei</h1>
-    </div>
+let xb3 = 100;
+let yb3 = 40;
 
-    <!-- main content -->
-    <div id="main-wrapper">
-        <div id="p5-canvas-container">
-            <!-- This is where your p5 sketch will be appended and appear! -->
-        </div>
-        <div class="two-columns">
-            <div class="left">
-                <h3 class="red">Scientific Name:</h3>
-                <p>horanghae immunoid</p>
+let xb4 = 100;
+let yb4 = 400;
 
-                <h3 class="red">Discovered by / at:</h3>
-                <p>Biomedical lab that was studying mutation cells, year 2100</p>
+let xb5 = 200; 
+let yb5 = 150; 
 
-                <h3 class="green">Family:Horanghae
+let xb6 = 300; 
+let yb6 = 50; 
 
-</h3>
-                <p>In the year 2100, the air was filled with a lethal electronic mist that paralyzes the natural T-cells that humans have, 
-                    This forced researchers to develop creatures that works better than the current immune system. When they finally, perfected their creature the researchers 
-                    injected themselves.
-                    Through a microscopic camera lens, the team watches as this creature navigates the crimson tunnels of their own veins to clear the clotted blood cells.
-                     When the user moves the mouse, the creature glides gracefully to nudge these cells back into motion. 
-                     The moment a mutated virus appears, a click of the mouse causes the creature’s body to become rigid and its eyes to enlargen. 
-                     </p>
-            </div>
-            <div class="right">
-                <h3 class="green">Habitat:</h3>
-                <p>When injected into your body it lives within your bloodstream.</p>
+let xb7 = 400; 
+let yb7 = 150; 
 
-                <h3 class="green">Appearance:</h3>
-                <p>It's a microscopic, alien like shaped guardian that's inserted within the human bloodstream, It moves in a vibrating way that outpaces any natural cells. It uses advanced sensors and can detect and intercept foreign pathogens like viruses with accuracy before they even trigger a systemic immune response. 
-                    When it encounters a blockage or slowing red blood
-                     cells during a cardiac attack, it uses it's body to "nudge" that red blood cell to restart blood flow/circulation. 
-                <h3 class="green">Key Characteristics:</h3>
-                <ul>
-                    <li>The creature is typically nice and glides smoothly to nudge red blood cells, However its demeanor shifts instantly when they detect a pathogen(virus).
-                         The moment a virus is sensed, the creature’s body becomes rigid and its eyes expand becoming focused entirely on the threat. 
-                       
-                         
-</li>
-                
-                </ul>
-            </div>
-        </div>
-        <div class="one-column">
-            <p>
-                <span class="yellow">What we know so far about horanghae immunoid?</span>
-                The giraffe is a large African hoofed mammal belonging to the genus Giraffa. It is the tallest living
-                terrestrial animal and the largest ruminant on Earth. Traditionally, giraffes have been thought of as
-                one species, Giraffa camelopardalis, with nine subspecies. Most recently, researchers proposed dividing
-                them into up to eight extant species due to new research into their mitochondrial and nuclear DNA, as
-                well as morphological measurements. Seven other extinct species of Giraffa are known from the fossil
-                record. (This is from Wikipedia, write the story, history, facts, tales, myths, anecdotes about your
-                creature.)
-                <br>
-                <span class="yellow">User Manual</span>  
-                         <p> 1. As you move your cursor across the screen, the creature moves with the cursor. 
-                         You can manually steer it toward areas of red blood cells to nudge them.
-                        2. The moment you click, the creature’s behavior becomes alerted; its body goes rigid, and its eyes expand. 
-                        In this state, it ignores the general flow of the blood to focus entirely on the virus.
-                        </p>
-            </p>
-        </div>
-    </div>
+let xb8 = 400; 
+let yb8 = 400; 
 
-    <!-- Footer -->
-    <div id="footer" class="black">
-        <p>A CCLab project made by Naransuvd Turtogtokh in Spring 2026</p>
-    </div>
+let xb9 = 300; 
+let yb9 = 300; 
 
-    <!-- Home: Link back to the ATLAS page-->
-    <div id="home">
-        <a href="https://cclab.work/atlas">Back to the ATLAS</a>
-    </div>
+let xb10 = 700; 
+let yb10= 500; 
 
-    <!-- Include your sketch.js file here -->
-    <script src="sketch.js" type="text/javascript"> </script>
-</body>
 
-</html>
+function setup() {
+  let canvas = createCanvas(800, 500);
+canvas.parent("p5-canvas-container");
+  angleMode(DEGREES);
+  r = 0; //red
+  g = 0; //gree
+  b = 0; //blue? black
+  x = width / 2;
+  y = height / 2;
+  a = 10;
+  c = color(220);
+}
+
+function draw() {
+  mousePressed();
+  background(251, 41, 51); //red
+  virus(x, y, 50);
+  
+  drawBloodcell(xb1, yb1);
+  drawBloodcell(xb2, yb2);
+  drawBloodcell(xb3, yb3);
+  drawBloodcell(xb4, yb4);
+  drawBloodcell(xb5, yb5);
+  drawBloodcell(xb6, yb6);
+drawBloodcell(xb7, yb7);
+  drawBloodcell(xb8, yb8);
+  drawBloodcell(xb9, yb9);
+  drawBloodcell(xb10, yb10);
+
+  drawCreature(x, y, angle, f);
+
+  drawAntenna(x, y);
+  // output = map(input, inStart, inEnd, outStart, outEnd);
+  //a = map(mouseY, 0, height, 300, 10);
+ // r = map(mouseX, 0, width, 0, 255);
+  //g = random(0, 255);
+  b = map(mouseY, 0, height, 255, 0);
+
+  noStroke();
+
+  let d = dist(mouseX, mouseY, x, y);
+  let s = map(sin(frameCount * 0.05), -1, 1, 1, 20);
+
+  let fly = sin(frameCount * 0.05) * 10;
+
+  //drawCreature(width / 2, height / 2+ fly);
+  if (mouseIsPressed) {
+    if (d < 25) {
+      //radius of the circle
+
+      accX = (mouseX - x) * -away;
+      accY = (mouseY - y) * -away;
+      speedX += accX;
+      speedY += accY;
+
+      angle = map(sin(frameCount * 10), -1, 1, -45, 45);
+      f = lerp(f, 40, 0.1);
+    }
+    
+
+  } else {
+    angle = 0;
+    x = lerp(x, mouseX, 0.05); 
+    y = lerp(y, mouseY, 0.05);
+    
+    f = lerp(f, 10, 0.1);
+
+  }
+  mouseX = width * noise(frameCount * 0.01);
+  mouseY = height * noise(frameCount * 0.008);
+  //let d = dist(mouseX, mouseY, x, y);
+
+  
+  // bloodcell moving away
+ 
+     if (dist(x, y, xb1, yb1) < 80) {
+    xb1 = lerp(xb1, x, -0.05);
+    yb1 = lerp(yb1, y, -0.05);
+  }
+
+  if (dist(x, y, xb2, yb2) < 80) {
+    xb2 = lerp(xb2, x, -0.05);
+    yb2 = lerp(yb2, y, -0.05);
+  }
+
+  if (dist(x, y, xb3, yb3) < 80) {
+    xb3 = lerp(xb3, x, -0.05);
+    yb3 = lerp(yb3, y, -0.05);
+  }
+  
+  if (dist(x, y, xb4, yb4) < 80) {
+    xb4 = lerp(xb4, x, -0.05);
+    yb4 = lerp(yb4, y, -0.05);
+  }
+  
+  if (dist(x, y, xb5, yb5) < 80) {
+    xb5 = lerp(xb5, x, -0.05);
+    yb5 = lerp(yb5, y, -0.05);
+  }
+  
+  if (dist(x, y, xb6, yb6) < 80) {
+    xb6 = lerp(xb6, x, -0.05);
+    yb6 = lerp(yb6, y, -0.05);
+  }
+  
+  if (dist(x, y, xb7, yb7) < 80) {
+    xb7 = lerp(xb7, x, -0.05);
+    yb7 = lerp(yb7, y, -0.05);
+  }
+  
+  if (dist(x, y, xb8, yb8) < 80) {
+    xb8 = lerp(xb8, x, -0.05);
+    yb8 = lerp(yb8, y, -0.05);
+  }
+  
+  if (dist(x, y, xb9, yb9) < 80) {
+    xb9 = lerp(xb9, x, -0.05);
+    yb9 = lerp(yb9, y, -0.05);
+  }
+  
+  if (dist(x, y, xb10, yb10) < 80) {
+    xb10 = lerp(xb10, x, -0.05);
+    yb10 = lerp(yb10, y, -0.05);
+  }
+}
+
+function mousePressed() {
+  background(random(255), random(255), random(255));
+}
+
+//blood cells
+function drawBloodcell(xb, yb) {
+  push();
+  translate(xb, yb);
+  rotate(frameCount * -1);
+  stroke(0);
+  strokeWeight(3);
+  fill(235, 55, 40);
+  ellipse(0, 0, 100, 60);
+  noStroke();
+  fill(249, 80, 80);
+  ellipse(0, 0, 50, 40);
+  pop();
+}
+
+function drawCreature(x, y, angle, f) {
+  push();
+  translate(x, y);
+  rotate(angle);
+
+  fill(116, 238, 21);
+  ellipse(0, 60, 50, 80, 10);
+  noStroke();
+
+  //hands
+  noStroke();
+  let wave = sin(frameCount * f) * 10;
+  // Left Arm
+  ellipse(-35, 40 + wave, 40, 20);
+  // Right Arm
+  ellipse(35, 40 - wave, 40, 20);
+
+  //face
+  ellipse(0, 0, 90, 100, 16);
+
+  //black part of eyes
+  fill(0);
+  if (mouseIsPressed === true) {
+    ellipse(20, 0, 40, 70, 16);
+    ellipse(-20, 0, 40, 70, 16);
+  } else {
+    ellipse(20, 0, 40, 40, 16);
+    ellipse(-20, 0, 40, 40, 16);
+  }
+
+  //white part of eyes
+  fill(255);
+
+  if (mouseIsPressed === true) {
+    ellipse(20, 10, 10, 40, 16);
+    ellipse(15, 0, 20, 50, 16);
+    ellipse(-20, 10, 10, 40, 16);
+    ellipse(-25, 0, 20, 50, 16);
+  } else {
+    ellipse(20, 10, 10, 10, 16);
+    ellipse(15, 0, 20, 20, 16);
+    ellipse(-20, 10, 10, 10, 16);
+    ellipse(-25, 0, 20, 20, 16);
+  }
+  if (mouseIsPressed === true) {
+    fill(255, 0, 0);
+    arc(0, 10, 20, 30, 0, PI);
+  } else {
+    fill(255);
+    arc(0, 10, 20, 30, 0, PI);
+  }
+}
+
+// antenna
+function drawAntenna(x, y) {
+  if (mouseIsPressed === true) {
+  } else {
+    push();
+    beginShape();
+    translate(10, -80);
+    let lineLength = 10;
+    for (let i = -lineLength; i <= lineLength; i += lineLength / 10) {
+      strokeWeight(10);
+      stroke(240, 0, 255);
+      let v = 10 * sin(frameCount * 0.1 - i);
+      vertex(v, i);
+
+      endShape();
+
+    }
+  }
+}
+
+
+function virus() {
+  if (mouseIsPressed) {
+  push();
+  
+    background(random(255));
+    let bobbing = sin(frameCount * 2) * 150;
+    translate(width * 0.8, y+bobbing);
+    rotate(frameCount * 5);
+    fill(150, 0, 255);
+    stroke(0);
+    for (let i = 0; i < 8; i++) {
+      rotate(45);
+      line(0, 0, 40, 0);
+    }
+    circle(0, 0, 50);
+    pop();
+  }
+}
+
+
+
+
