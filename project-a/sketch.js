@@ -51,7 +51,7 @@ let yb10= 500;
 
 function setup() {
   let canvas = createCanvas(800, 500);
-canvas.parent("p5-canvas-container");
+canvas.parent('p5-canvas-container');
   angleMode(DEGREES);
   r = 0; //red
   g = 0; //gree
