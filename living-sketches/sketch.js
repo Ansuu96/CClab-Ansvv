@@ -35,6 +35,8 @@ function preload() {
     for(let i = 1; i<=3; i++){
     moonImgs.push(loadImage("moon-" + i + ".jpg"));
   }
+  mySound = loadSound("bbc_animals--h_07024178.mp3");
+mySound1 = loadSound("bbc_horses---h_07039333.mp3");
 }
 
 function setup() {
