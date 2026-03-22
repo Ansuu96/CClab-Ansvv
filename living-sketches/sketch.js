@@ -197,7 +197,10 @@ function eraseBg(imgs, threshold = 10) {
     img.updatePixels();
   }
 
-  function mousePressed() {
+  // this function uses the pixels array
+  // we will cover this later in the semester - stay tuned
+}
+function mousePressed() {
   if (mySound.isPlaying() == false) {
     mySound.play();
   } else {
@@ -211,7 +214,4 @@ mySound1.play();
     mySound1.stop();
   }
   }
-  // this function uses the pixels array
-  // we will cover this later in the semester - stay tuned
-}
 
