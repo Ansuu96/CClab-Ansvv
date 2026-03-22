@@ -8,6 +8,8 @@ let moon;
 let horse;
 let sep = 30;
 let angle = 0;
+let mySound;
+let mySound1;
 
 let curSun = 0;
 let curMoon = 0;
@@ -40,8 +42,8 @@ function setup() {
 
    eraseBg(scanned, 10);
    eraseBg(HorseImgs);
-eraseBg(sunImgs);
-eraseBg(moonImgs);
+eraseBg(sunImgs,200);
+eraseBg(moonImgs,240);
  
   sun = crop(sunImgs,0,0, sunImgs[0].width, sunImgs[0].height);
   horse = crop(HorseImgs,0,0, HorseImgs[0].width, HorseImgs[0].height);
@@ -129,6 +131,7 @@ if (keyIsPressed == true){
 //moon
   //push();
   imageMode(CENTER);
+  scale(0.8)
   image(
     moon[curMoon],
     0,
@@ -143,6 +146,8 @@ if (keyIsPressed == true){
   //pop();
 }else{
 imageMode(CENTER);
+  scale(0.5)
+translate(horseX, horseY);
 image(
     sun[curSun],
     0,
@@ -162,8 +167,7 @@ curSun = floor((frameCount / 25) % sun.length);
 
 // }
 
-  
-  
+
 
 
 // You shouldn't need to modify these helper functions:
@@ -189,6 +193,21 @@ function eraseBg(imgs, threshold = 10) {
       }
     }
     img.updatePixels();
+  }
+
+  function mousePressed() {
+  if (mySound.isPlaying() == false) {
+    mySound.play();
+  } else {
+    mySound.stop();
+  }
+}
+  function keyPressed() {
+    if (mySound1.isPlaying() == false) {
+mySound1.play();
+  }else{
+    mySound1.stop();
+  }
   }
   // this function uses the pixels array
   // we will cover this later in the semester - stay tuned
