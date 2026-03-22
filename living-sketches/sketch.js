@@ -162,7 +162,7 @@ image(
 curSun = floor((frameCount / 25) % sun.length);
 //pop();
 }
-}
+//}
 
 // function keyPressed() {
 //   curMoon = (curMoon + 1)%moon.length;
@@ -196,7 +196,7 @@ function eraseBg(imgs, threshold = 10) {
     }
     img.updatePixels();
   }
-
+}
   // this function uses the pixels array
   // we will cover this later in the semester - stay tuned
 }
