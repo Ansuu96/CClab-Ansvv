@@ -1,196 +1,248 @@
-let scanned = [];
-let HorseImgs = [];
-let sunImgs = [];
-let moonImgs = [];
-let rockets;
-let sun;
-let moon;
-let horse;
-let sep = 30;
-let angle = 0;
 
-let curSun = 0;
-let curMoon = 0;
-let curHorse = 0;
-let horseX = 0;
-let horseY = 300;
-let horseSpeedX = 2;
-//let sunY= 500;
-//let moonY = 500;
+let h;
+let a;
+let img;
+let tsereg;
+let barildaan;
+let checkRemove = 0;
 
+let myLetter;     
+let myStampBook;  
 
 function preload() {
-  for (let i = 1; i <= 6; i++) {
-    console.log("Loading frame" +i);
-    scanned.push(loadImage("20260311120631-" + i + ".jpg"));
-  }
-    for(let i = 1; i<=5; i++){
-     HorseImgs.push(loadImage("Horse-" + i + ".png"));
-  }
-    for(let i = 1; i<=3; i++){
-      sunImgs.push(loadImage("sun-" + i + ".jpg"));
-  }
-    for(let i = 1; i<=3; i++){
-    moonImgs.push(loadImage("moon-" + i + ".jpg"));
-  }
+  img = loadImage("assets/IMG_7396.jpeg");
+tsereg = loadImage("assets/IMG_7401.jpeg");
+  barildaan = loadImage("assets/IMG_7399.jpeg");
 }
 
 function setup() {
-  createCanvas(800, 500);
+  createCanvas(400, 400);
+  imageMode(CENTER);
+  rectMode(CENTER);
 
-   eraseBg(scanned, 10);
-   eraseBg(HorseImgs);
-eraseBg(sunImgs);
-eraseBg(moonImgs);
- 
-  sun = crop(sunImgs,0,0, sunImgs[0].width, sunImgs[0].height);
-  horse = crop(HorseImgs,0,0, HorseImgs[0].width, HorseImgs[0].height);
-  moon = crop(moonImgs,0,0, moonImgs[0].width, moonImgs[0].height);
-//  horse = HorseImgs;
-//   sun = sunImgs;
-//   moon = moonImgs;
+  
+  myLetter = new Letter();
+  myStampBook = new Stamp(tsereg, barildaan);
+  
 }
-
 function draw() {
+  background(220);
 
-  //background
-  if(mouseIsPressed){
-    background(0)
-  }else{
-  background(210,210,207);
+  //  Chest 
+  fill(150, 74, 0);
+  stroke(101, 67, 33);
+  strokeWeight(7);
+  rect(width / 2, height / 2, 260, 200);
+
+  //shelf
+  strokeWeight(15);
+  line(77, 150, 323, 150);
+  line(77, 200, 323, 200);
+  line(77, 250, 323, 250);
+  line(77, 295, 323, 295);
+
+  // door goes away
+  if (checkRemove == 1) {
+    
+    //letter
+    if (myStampBook.opened == false) {
+      myLetter.display();
+      //fill(255);
+      //myLetter.display = fill(255);
+    }
+    // Only show the book if the letter is closed
+    if (myLetter.opened == false) {
+      fill(150,75,0)
+      myStampBook.display();
+}
   }
-fill(9, 121, 105)
-noStroke();
-triangle(0,400,10,50,170,400);
-triangle(50,400,200,150,350,400);
-triangle(200,400,350,200,500,400);
-triangle(350,400,500,250,650,400);
-triangle(500,400,650,300,800,400);
 
-rect(0,380,800,150);
+  //Chest Door 
+  h = map(mouseY, 0, height, 250, 200);
+  a = map(mouseX, 0, width, width / 2, 400);
+  if (mouseX >= a) checkRemove = 1;
 
- //grass 
-for (let i = 0; i< 800; i+= sep) {
-for (let j = 400; j < 500; j+=sep){
-  
-push();
-translate(i, j);
-  let d= dist(horseX , horseY, i,j)
-  //let D= dist(0,0,800,500)
-  let f= map(d,0,width,2,1)
-  angle= map(d,0,width,0,-PI);
-  colorMode(HSB, 100)
-  let h= map(d,0,width,30,60)
-rotate(-angle);
-  
-  scale(f)
-  stroke(h,80,90,60)
-  strokeWeight(5)
-  line(0,0,sep*0.1, sep*0.1)
-  pop();
-}
-}
-//horse
-push();
-  translate(horseX, horseY);
-  scale(3)
-   //rotate(radians(-90));
-  imageMode(CENTER);
-  image(
-   horse[curHorse],
-   0,
-   0,
-   horse[0].width * 0.25,
-   horse[0].height * 0.25
-    );
-  pop();
-//update horse position
-  horseX = mouseX;
-
-//horse animation
-curHorse = floor((frameCount / 5) % horse.length);
-//sun
-//moon
-
-//push();
-// imageMode(CENTER);
-// image(
-//     sun[curSun],
-//     0,
-//     0,
-//     //mouseX,
-//    //mouseY,
-//     sun[0].width ,
-//     sun[0].height ,
-//   );
-// curSun = floor((frameCount / 25) % sun.length);
-// //pop();
-if (keyIsPressed == true){
-//moon
-  //push();
-  imageMode(CENTER);
-  image(
-    moon[curMoon],
-    0,
-    0,
-    //mouseX,
-    //mouseY,
-    moon[0].width *0.5,
-    moon[0].height *0.5
-  );
-
-  curMoon = floor((frameCount /35) % moon.length)
-  //pop();
-}else{
-imageMode(CENTER);
-image(
-    sun[curSun],
-    0,
-    0,
-    //mouseX,
-   //mouseY,
-    sun[0].width ,
-    sun[0].height ,
-  );
-curSun = floor((frameCount / 25) % sun.length);
-//pop();
-}
-}
-
-// function keyPressed() {
-//   curMoon = (curMoon + 1)%moon.length;
-
-// }
-
-  
-  
-
-
-// You shouldn't need to modify these helper functions:
-
-function crop(imgs, x, y, w, h) {
-  let cropped = [];
-  for (let i = 0; i < imgs.length; i++) {
-    cropped.push(imgs[i].get(x, y, w, h));
+  if (checkRemove == 0) {
+    image(img, a, height / 2, 260, h);
   }
-  return cropped;
 }
 
-function eraseBg(imgs, threshold = 10) {
-  for (let i = 0; i < imgs.length; i++) {
-    let img = imgs[i];
-    img.loadPixels();
-    for (let j = 0; j < img.pixels.length; j += 4) {
-      let d = 255 - img.pixels[j];
-      d += 255 - img.pixels[j + 1];
-      d += 255 - img.pixels[j + 2];
-      if (d < threshold) {
-        img.pixels[j + 3] = 0;
+function mousePressed() {
+  if (checkRemove == 1) {
+    
+    //letter
+    if (mouseX > 68 && mouseX < 103 && mouseY > 186 && mouseY < 194) {
+      if (myStampBook.opened == false) {
+        myLetter.opened = true;
+      }
+     }
+
+   //stamp
+    if (mouseX > 160 && mouseX < 232 && mouseY > 274 && mouseY < 282) {
+      if (myLetter.opened == false) {
+        myStampBook.opened = true;
       }
     }
-    img.updatePixels();
   }
-  // this function uses the pixels array
-  // we will cover this later in the semester - stay tuned
-}
+//} 
+// let c = [];
+// let l = [];
+// let s = [];
 
+// let img;
+// let tsereg;
+// let barildaan;
+
+
+
+// function preload(){
+//   img = loadImage("assets/IMG_7396.jpeg");
+//   tsereg = loadImage("assets/IMG_7401.jpeg");
+//   barildaan = loadImage("assets/IMG_7399.jpeg");
+// }
+
+// function setup() {
+//   let canvas = createCanvas(800, 500);
+//   canvas.parent("p5-canvas-container");
+//   imageMode(CENTER);
+
+// l= new Letter();
+//   s = new Stamp();
+//   c = new Chest();
+// }
+
+// function draw() {
+//  background(220);
+//   rectMode(CENTER);
+// }
+// function mousePressed() {
+//   l.push(new Letter())
+//   if (checkRemove == 1) {
+//     // Letter 
+//     // if (mouseX > 74 && mouseX < 103 && mouseY > 186 && mouseY < 194 && stampOpened ==false) {
+//     //   letterS = 160;
+//     //   letterH = 150;
+//     //   letterW = 200; 
+//     //   letterHeight = 200;
+//     //   letterOpened = true; 
+//     } 
+//     // Stamp Book mouse pressed to stamps
+//     else if (mouseX > 180 && mouseX < 232 && mouseY > 274 && mouseY < 282 && letterOpened == false) {
+//       stampS = 160;
+//       stampH = 150;
+//       stampW = 200;
+//       stampHeight = 200;
+//       stampOpened = true;
+//     }
+//   }
+// //   chest.display();
+// //   letter.display();
+// //   stamp.display();
+// // }
+
+// // function mousePressed() {
+// //   if (chest.checkRemove == 1) {
+
+// //     // LETTER
+// //     if (
+// //       mouseX > 74 && mouseX < 103 &&
+// //       mouseY > 186 && mouseY < 194 &&
+// //       stamp.opened == false
+// //     ) {
+// //       letter.s = 160;
+// //       letter.h = 150;
+// //       letter.w = 200;
+// //       letter.y = 200;
+// //       letter.opened = true;
+// //     }
+
+// //     // STAMP
+// //     else if (
+// //       mouseX > 180 && mouseX < 232 &&
+// //       mouseY > 274 && mouseY < 282 &&
+// //       letter.opened == false
+// //     ) {
+// //       stamp.s = 160;
+// //       stamp.h = 150;
+// //       stamp.w = 200;
+// //       stamp.y = 200;
+// //       stamp.opened = true;
+// //     }
+// //   }
+// // }
+
+
+
+
+
+
+
+// function draw() {
+//   background(220);
+//   rectMode(CENTER);
+  
+//   // chest background ar tal
+//   stroke(101, 67, 33);
+//   strokeWeight(7);
+//   fill(150, 74, 0);
+//   rect(width / 2, height / 2, 260, 200);
+
+//   // Shelves
+//   stroke(101, 67, 33);
+//   strokeWeight(15);
+//   line(77, 150, 323, 150);
+//   line(77, 200, 323, 200);
+//   line(77, 250, 323, 250);
+//   line(77, 295, 323, 295);
+
+//   // letter
+//   letter.display();
+
+//   // stampbook
+//   if (letterOpened == false) {
+//     fill(196, 164, 132);
+//     stroke(0);
+//     strokeWeight(2);
+
+//     // mouse movement with stampbook
+//     if (stampOpened ) {
+//       if(mouseIsPressed){
+//       push();
+//       // Fix: Removed 'width' from translate so rects stay on screen
+//       translate(width/2 - 160, height/2 - 180); 
+
+//         image(tsereg, 100, 150,50,50);
+//       image(barildaan,160, 150, 50, 50);
+//       rect(100, 210, 50, 50);
+//       rect(160, 210, 50, 50);
+//       rect(220, 210, 50, 50);
+//       rect(220, 150, 50, 50);
+//       pop();
+//       }
+//     } else {
+//       rect(stampW, stampHeight, stampS, stampH);
+//     }
+    
+//     if (stampOpened) {
+//       fill(0);
+//       noStroke();
+//       textAlign(CENTER);
+//       textSize(10);
+//       text("STAMP BOOK", stampW, stampHeight -10);
+//     }
+//   }
+
+//   // chest door
+//   h = map(mouseY, 0, height, 250, 200);
+//   a = map(mouseX, 0, width, width/2, 400);
+  
+//   if (mouseX >= a) 
+//     checkRemove = 1;
+
+//   if (checkRemove == 0) {
+//     image(img, a, height/2, 260, h);
+//   }
+// }
+
+
+}
