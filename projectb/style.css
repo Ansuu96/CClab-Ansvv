@@ -1,0 +1,33 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  align-self: center;
+  color: lightblue;
+}
+
+canvas {
+  display: block;
+  width: 800px !important;
+  height: 800px !important;
+}
+
+#p5-canvas-container { 
+}
+
+#main-wrapper {
+  width: 800px;
+  position: relative;
+  margin: 0 auto;
+}
+
+h1 {
+  color: lightblue;
+}
+/* title */
+#title-wrapper {
+    text-align: center;
+}
+.p5-canvas{
+  
+}
