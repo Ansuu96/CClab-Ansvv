@@ -226,7 +226,7 @@ if(chooseimage5){
    // (mySoundis.Playing() == true);
   }
   
-  if (mouseX > width * 1.5){
+  if (mouseX > width * 2){
     showDoor = false;
     image(img, 0, 0, 1, 1);
     //display.cards();
